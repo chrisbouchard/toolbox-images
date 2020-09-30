@@ -24,15 +24,15 @@ tar --verbose --extract --gzip --directory=.build/texlab --recursive-unlink \
     --file=.build/texlab-x86_64-linux.tar.gz
 
 step 'Creating container'
-container="$(buildah from localhost/chrisbouchard/base-toolbox)"
+container=$(buildah from localhost/chrisbouchard/base-toolbox)
 
 step 'Installing TexLab'
-buildah add "$container" .build/texlab/texlab /usr/local/bin/texlab
+buildah add $container .build/texlab/texlab /usr/local/bin/texlab
 
 step 'Installing DNF dependencies'
-buildah run --volume $PWD/.build/dnfcache:/var/cache/dnf:z "$container" \
+buildah run --volume $PWD/.build/dnfcache:/var/cache/dnf:z $container \
     dnf install --assumeyes make texlive-scheme-full
 
 step 'Committing container'
-buildah commit "$container" chrisbouchard/tex-toolbox
+buildah commit $container chrisbouchard/tex-toolbox
 
