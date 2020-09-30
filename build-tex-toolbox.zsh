@@ -35,4 +35,5 @@ buildah run --volume $PWD/.build/dnfcache:/var/cache/dnf:z $container \
 
 step 'Committing container'
 buildah commit $container chrisbouchard/tex-toolbox
+buildah tag chrisbouchard/tex-toolbox latest
 
