@@ -28,7 +28,7 @@ buildah add $container \
 
 step 'Installing DNF dependencies'
 buildah run --volume $PWD/.build/dnfcache:/var/cache/dnf:z $container \
-    dnf install --assumeyes fzf neovim python-neovim ripgrep zsh
+    dnf install --assumeyes autossh fzf neovim python-neovim ripgrep tmux zsh
 
 step 'Committing container'
 buildah commit $container chrisbouchard/base-toolbox
